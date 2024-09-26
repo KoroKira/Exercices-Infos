@@ -22,4 +22,3 @@ def print_card(rang, suite):
     print(cote)
     print(rang_ligne_droit)
     print(bas)
-

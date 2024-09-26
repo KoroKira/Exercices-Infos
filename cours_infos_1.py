@@ -40,7 +40,13 @@ print(f"La somme des deux nombres = {resultat} et la partie entière de cette so
 
 # Programme 5
 # Ici ce qu'on nous demande, c'est de remplacer le point par une virgule 
-nombre1 = float(input("Entrer nombre 1:"))
-nombre2 = float(input("Entrer nombre 2:"))
+nombre1 = float(input("Entrer nombre 1: "))
+nombre2 = float(input("Entrer nombre 2: "))
 resultat = nombre1 + nombre2
-print(f"{nombre1} + {nombre2} = {str(resultat).replace('.', ',')}")
+
+# Séparation de la partie entière et décimale
+partie_entiere = int(resultat)
+partie_decimale = round((resultat - partie_entiere) * 100)
+
+# Affichage avec une virgule pour séparer
+print(f"{int(nombre1)} + {int(nombre2)} = {partie_entiere},{partie_decimale:02d}")

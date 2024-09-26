@@ -16,12 +16,14 @@
    - Méthode pour mélanger les cartes.
    - Méthode `draw()` pour tirer une carte.
 
-   __**On a un générateur random des cartes (d'abord on a le créateur de carte et le tireur), il nous faut les stocker et les gérer entre elles, parce que lourd d'avoir 5 fois d'affilé de l'as de pique par malchance**__
+   __**FAIT**__
 
 3. **Classe `Main`** :
    - Attribut pour stocker les cartes du joueur.
    - Méthode pour ajouter une carte à la main.
    - Méthode pour calculer la valeur de la main (inclure la gestion de l'As : 1 ou 11).
+
+    __**FAIT**__
 
 ---
 
@@ -37,6 +39,8 @@
 
 2. **Classe `Croupier`** (hérite de `Joueur`) :
    - Logique pour tirer automatiquement des cartes tant que la main est inférieure à 17.
+
+   __**FAIT**__
 
 ---
 
@@ -54,6 +58,8 @@
 2. **Méthode `play_game()`** :
    - Gérer le tour par tour pour le joueur et le croupier.
    - Comparer les mains à la fin pour déterminer le gagnant.
+
+   __**FAIT**__
 
 ---
 
@@ -85,32 +91,7 @@
 - Ajouter des fonctionnalités avancées et des options supplémentaires.
 
 ### **Tâches** :
-1. Implémenter une gestion de plusieurs joueurs.
 2. Ajouter une option pour jouer plusieurs manches avec conservation du solde.
 3. Ajouter des statistiques (nombre de victoires, défaites, égalités).
 4. Implémenter une stratégie basique pour le croupier.
-
----
-
-## **Module 7 : Tests Unitaires**
-### **Objectif** :
-- Assurer la robustesse du code via des tests automatisés.
-
-### **Tâches** :
-1. Écrire des tests unitaires pour les différentes classes :
-   - Tests sur la création des cartes et paquets.
-   - Tests du calcul des mains.
-   - Tests des actions (`hit()`, `stand()`, etc.).
-
-2. Créer un fichier `test_blackjack.py` et utiliser `unittest` ou `pytest`.
-
----
-
-## **Module 8 : Optimisation et Extensibilité**
-### **Objectif** :
-- Examiner les possibilités d'optimisation et rendre le code flexible pour des améliorations futures.
-
-### **Tâches** :
-1. Optimiser la gestion des As pour éviter des recalculs inutiles.
-2. Refactoriser pour permettre des variantes (ex. : Blackjack européen).
-3. Documenter le code et ajouter des commentaires pour faciliter l’extensibilité.
+5. Faire une page pour lancer le jeu, un fichier game.py

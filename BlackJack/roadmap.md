@@ -9,10 +9,14 @@
    - Attributs : `suit` (couleur), `rank` (valeur).
    - Méthode : `__str__()` pour afficher la carte en chaîne de caractères.
 
+   __**FAIT**__
+
 2. **Classe `Deck`** :
    - Méthode pour créer un jeu de 52 cartes.
    - Méthode pour mélanger les cartes.
    - Méthode `draw()` pour tirer une carte.
+
+   __**On a un générateur random des cartes (d'abord on a le créateur de carte et le tireur), il nous faut les stocker et les gérer entre elles, parce que lourd d'avoir 5 fois d'affilé de l'as de pique par malchance**__
 
 3. **Classe `Main`** :
    - Attribut pour stocker les cartes du joueur.

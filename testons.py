@@ -1,16 +1,23 @@
 import os
 from datetime import datetime
 
-def scan_system_full(root_dir):
-    """Scanner tout le contenu du dossier A, y compris les sous-dossiers"""
+def scan_directory_at_level(root_dir, level):
+    """Scanner le contenu d'un dossier jusqu'à un certain niveau d'arborescence."""
     files = {}
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        # Calculer le niveau de profondeur actuel
+        depth = dirpath[len(root_dir):].count(os.sep)
+        if depth > level:
+            # Si on dépasse le niveau spécifié, arrêter
+            dirnames[:] = []  # Ne pas entrer dans les sous-dossiers
+            continue
 
-    for dirpath, _, filenames in os.walk(root_dir):
+        # Ajouter les fichiers du niveau en cours
         for filename in filenames:
             try:
                 file_path = os.path.join(dirpath, filename)
                 file_stats = os.stat(file_path)
-                # Stocker le chemin relatif pour la comparaison
+                # Stocker le chemin relatif pour comparaison
                 relative_path = os.path.relpath(file_path, root_dir)
                 files[relative_path] = {
                     'path': file_path,
@@ -22,48 +29,24 @@ def scan_system_full(root_dir):
                     output_file.write(f"Erreur lors de la lecture du fichier {filename} dans {dirpath}: {e}\n")
     return files
 
-def scan_system_first_level(root_dir):
-    """Scanner uniquement les fichiers et dossiers du premier niveau dans B"""
-    files = {}
-    for dirpath, _, filenames in os.walk(root_dir):
-        # Ne traiter que les fichiers du premier niveau
-        if dirpath == root_dir:
-            for filename in filenames:
-                try:
-                    file_path = os.path.join(dirpath, filename)
-                    file_stats = os.stat(file_path)
-                    # Stocker le chemin relatif
-                    relative_path = os.path.relpath(file_path, root_dir)
-                    files[relative_path] = {
-                        'path': file_path,
-                        'size': file_stats.st_size,
-                        'modified_time': file_stats.st_mtime
-                    }
-                except Exception as e:
-                    with open('comparaison_fichiers.txt', 'a') as output_file:
-                        output_file.write(f"Erreur lors de la lecture du fichier {filename} dans {dirpath}: {e}\n")
-            break  # Sortir après avoir traité le premier niveau
-    return files
-
-def comparer_dossiers(dossier_a, dossier_b):
+def comparer_dossiers(dossier_a, dossier_b, level=0):
+    """Comparer les dossiers A et B niveau par niveau"""
     # Scanner tout le dossier A
-    fichiers_a = scan_system_full(dossier_a)
+    fichiers_a = scan_directory_at_level(dossier_a, level)
+    
+    # Scanner seulement le niveau actuel de B
+    fichiers_b = scan_directory_at_level(dossier_b, level)
 
     # Préparation du fichier de sortie
-    with open('comparaison_fichiers.txt', 'w') as output_file:
-        # Parcourir les dossiers de premier niveau de A pour les comparer dans B
+    with open('comparaison_fichiers.txt', 'a') as output_file:
+        # Comparer les fichiers au niveau actuel
         for fichier in fichiers_a:
             # Obtenir le dossier parent du fichier dans A
             dossier_parent_a = os.path.dirname(fichier)
-            
-            # Comparer avec le premier niveau de B
             dossier_parent_b = os.path.join(dossier_b, dossier_parent_a)
-            
+
             if os.path.exists(dossier_parent_b) and os.path.isdir(dossier_parent_b):
-                # Scanner les fichiers de premier niveau dans le dossier correspondant de B
-                fichiers_b = scan_system_first_level(dossier_parent_b)
-                
-                # Comparer les fichiers dans ce dossier
+                # Scanner les fichiers du dossier correspondant dans B au niveau actuel
                 if fichier in fichiers_b:
                     # Comparaison des fichiers présents dans les deux dossiers
                     stats_a = fichiers_a[fichier]
@@ -82,9 +65,19 @@ def comparer_dossiers(dossier_a, dossier_b):
                         else:
                             output_file.write(f"{fichier}: Plus récent dans {dossier_a} et plus lourd ou égal que dans {dossier_b}\n")
                 else:
-                    output_file.write(f"{fichier}: Présent dans {dossier_a} mais absent de {dossier_b} au premier niveau\n")
+                    output_file.write(f"{fichier}: Présent dans {dossier_a} mais absent de {dossier_b} au niveau {level}\n")
             else:
-                output_file.write(f"Dossier {dossier_parent_a}: Absent de {dossier_b}\n")
+                output_file.write(f"Dossier {dossier_parent_a}: Absent de {dossier_b} au niveau {level}\n")
+
+        # Comparer les dossiers en commun pour aller plus en profondeur
+        for fichier in fichiers_a:
+            dossier_parent_a = os.path.dirname(fichier)
+            dossier_parent_b = os.path.join(dossier_b, dossier_parent_a)
+
+            # Si c'est un dossier dans les deux arborescences, on descend au niveau suivant
+            if os.path.exists(dossier_parent_b) and os.path.isdir(dossier_parent_b):
+                # Descendre dans l'arborescence pour les dossiers en commun
+                comparer_dossiers(os.path.join(dossier_a, dossier_parent_a), os.path.join(dossier_b, dossier_parent_a), level + 1)
 
 if __name__ == "__main__":
     # Chemins des dossiers à comparer

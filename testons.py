@@ -60,20 +60,21 @@ def comparer_dossiers_iteratif(dossier_a, dossier_b):
                     taille_b = stats_b['size']
 
                     if date_a < date_b:
-                        output_file.write(f"{fichier}: Plus ancien dans {dossier_a} que dans {dossier_b}\n")
+                        output_file.write(f"{fichier}: Plus ancien dans {current_a} que dans {current_b}\n")
                     elif date_a > date_b:
                         if taille_b > taille_a:
-                            output_file.write(f"{fichier}: Plus récent dans {dossier_a} mais plus léger que dans {dossier_b}\n")
+                            output_file.write(f"{fichier}: Plus récent dans {current_a} mais plus léger que dans {current_b}\n")
                         else:
-                            output_file.write(f"{fichier}: Plus récent dans {dossier_a} et plus lourd ou égal que dans {dossier_b}\n")
+                            output_file.write(f"{fichier}: Plus récent dans {current_a} et plus lourd ou égal que dans {current_b}\n")
                 else:
-                    output_file.write(f"{fichier}: Présent dans {dossier_a} mais absent de {dossier_b} au niveau {level}\n")
+                    output_file.write(f"{fichier}: Présent dans {current_a} mais absent de {current_b} au niveau {level}\n")
 
             # Ajouter les sous-dossiers communs pour une future comparaison au prochain niveau
             for fichier in fichiers_a:
-                dossier_parent_a = os.path.dirname(fichier)
-                dossier_parent_b = os.path.join(current_b, os.path.relpath(dossier_parent_a, current_a))
+                dossier_parent_a = os.path.dirname(os.path.join(current_a, fichier))  # Correction ici pour obtenir le chemin complet
+                dossier_parent_b = os.path.join(current_b, os.path.basename(dossier_parent_a))  # Correction ici pour éviter os.path.relpath
 
+                # Vérification avant d'ajouter à la pile
                 if os.path.exists(dossier_parent_b) and os.path.isdir(dossier_parent_b):
                     # Ajouter les sous-dossiers dans la pile pour la prochaine itération
                     pile.append((dossier_parent_a, dossier_parent_b, level + 1))

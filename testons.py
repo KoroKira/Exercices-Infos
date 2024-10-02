@@ -35,12 +35,22 @@ def comparer_dossiers_iteratif(dossier_a, dossier_b):
     # Pile de dossiers à comparer sous forme de tuples (dossier_A, dossier_B, niveau)
     pile = [(dossier_a, dossier_b, 0)]
     
+    # Ensemble pour garder la trace des dossiers visités
+    visited = set()
+    
     # Préparation du fichier de sortie
     with open('comparaison_fichiers.txt', 'a') as output_file:
         output_file.write("Début de la comparaison\n\n")
 
     while pile:
         current_a, current_b, level = pile.pop()
+
+        # Si ces dossiers ont déjà été visités, on les ignore
+        if (current_a, current_b) in visited:
+            continue
+        
+        # Marquer les dossiers comme visités
+        visited.add((current_a, current_b))
         
         # Scanner le niveau courant de A et B
         fichiers_a = scan_directory_at_level(current_a, level)
@@ -76,7 +86,6 @@ def comparer_dossiers_iteratif(dossier_a, dossier_b):
 
                 # Vérification avant d'ajouter à la pile
                 if os.path.exists(dossier_parent_b) and os.path.isdir(dossier_parent_b):
-                    # Ajouter les sous-dossiers dans la pile pour la prochaine itération
                     pile.append((dossier_parent_a, dossier_parent_b, level + 1))
 
 if __name__ == "__main__":

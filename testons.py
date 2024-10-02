@@ -29,26 +29,28 @@ def scan_directory_at_level(root_dir, level):
                     output_file.write(f"Erreur lors de la lecture du fichier {filename} dans {dirpath}: {e}\n")
     return files
 
-def comparer_dossiers(dossier_a, dossier_b, level=0):
-    """Comparer les dossiers A et B niveau par niveau"""
-    # Scanner tout le dossier A
-    fichiers_a = scan_directory_at_level(dossier_a, level)
+def comparer_dossiers_iteratif(dossier_a, dossier_b):
+    """Comparer les dossiers A et B niveau par niveau de manière itérative."""
     
-    # Scanner seulement le niveau actuel de B
-    fichiers_b = scan_directory_at_level(dossier_b, level)
-
+    # Pile de dossiers à comparer sous forme de tuples (dossier_A, dossier_B, niveau)
+    pile = [(dossier_a, dossier_b, 0)]
+    
     # Préparation du fichier de sortie
     with open('comparaison_fichiers.txt', 'a') as output_file:
-        # Comparer les fichiers au niveau actuel
-        for fichier in fichiers_a:
-            # Obtenir le dossier parent du fichier dans A
-            dossier_parent_a = os.path.dirname(fichier)
-            dossier_parent_b = os.path.join(dossier_b, dossier_parent_a)
+        output_file.write("Début de la comparaison\n\n")
 
-            if os.path.exists(dossier_parent_b) and os.path.isdir(dossier_parent_b):
-                # Scanner les fichiers du dossier correspondant dans B au niveau actuel
+    while pile:
+        current_a, current_b, level = pile.pop()
+        
+        # Scanner le niveau courant de A et B
+        fichiers_a = scan_directory_at_level(current_a, level)
+        fichiers_b = scan_directory_at_level(current_b, level)
+
+        # Comparer les fichiers au niveau actuel
+        with open('comparaison_fichiers.txt', 'a') as output_file:
+            for fichier in fichiers_a:
+                # Comparer les fichiers de A avec ceux de B
                 if fichier in fichiers_b:
-                    # Comparaison des fichiers présents dans les deux dossiers
                     stats_a = fichiers_a[fichier]
                     stats_b = fichiers_b[fichier]
 
@@ -66,18 +68,15 @@ def comparer_dossiers(dossier_a, dossier_b, level=0):
                             output_file.write(f"{fichier}: Plus récent dans {dossier_a} et plus lourd ou égal que dans {dossier_b}\n")
                 else:
                     output_file.write(f"{fichier}: Présent dans {dossier_a} mais absent de {dossier_b} au niveau {level}\n")
-            else:
-                output_file.write(f"Dossier {dossier_parent_a}: Absent de {dossier_b} au niveau {level}\n")
 
-        # Comparer les dossiers en commun pour aller plus en profondeur
-        for fichier in fichiers_a:
-            dossier_parent_a = os.path.dirname(fichier)
-            dossier_parent_b = os.path.join(dossier_b, dossier_parent_a)
+            # Ajouter les sous-dossiers communs pour une future comparaison au prochain niveau
+            for fichier in fichiers_a:
+                dossier_parent_a = os.path.dirname(fichier)
+                dossier_parent_b = os.path.join(current_b, os.path.relpath(dossier_parent_a, current_a))
 
-            # Si c'est un dossier dans les deux arborescences, on descend au niveau suivant
-            if os.path.exists(dossier_parent_b) and os.path.isdir(dossier_parent_b):
-                # Descendre dans l'arborescence pour les dossiers en commun
-                comparer_dossiers(os.path.join(dossier_a, dossier_parent_a), os.path.join(dossier_b, dossier_parent_a), level + 1)
+                if os.path.exists(dossier_parent_b) and os.path.isdir(dossier_parent_b):
+                    # Ajouter les sous-dossiers dans la pile pour la prochaine itération
+                    pile.append((dossier_parent_a, dossier_parent_b, level + 1))
 
 if __name__ == "__main__":
     # Chemins des dossiers à comparer
@@ -85,6 +84,6 @@ if __name__ == "__main__":
     dossier_b = r"\\eDossier\sdossier\tdossier\rdossier\Hdossier dossier dossier B"
 
     # Lancer la comparaison et écrire les résultats dans un fichier texte
-    comparer_dossiers(dossier_a, dossier_b)
+    comparer_dossiers_iteratif(dossier_a, dossier_b)
 
     print("Comparaison terminée ! Résultats enregistrés dans 'comparaison_fichiers.txt'.")

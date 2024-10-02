@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 def scan_system(root_dir):
-    # Initialize lists to store files (with their relative paths and stats)
+    # Initialize dictionary to store files with their relative paths and stats
     files = {}
 
     # Walk through the directory structure
@@ -10,6 +10,7 @@ def scan_system(root_dir):
         for filename in filenames:
             file_path = os.path.join(dirpath, filename)
             file_stats = os.stat(file_path)
+            # Store the relative path of the file to compare with the other directory
             relative_path = os.path.relpath(file_path, root_dir)
             files[relative_path] = {
                 'path': file_path,

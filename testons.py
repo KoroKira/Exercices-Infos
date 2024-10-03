@@ -1,99 +1,60 @@
 import os
+import filecmp
 from datetime import datetime
 
-def scan_directory_at_level(root_dir, level):
-    """Scanner le contenu d'un dossier jusqu'à un certain niveau d'arborescence."""
-    files = {}
-    for dirpath, dirnames, filenames in os.walk(root_dir):
-        # Calculer le niveau de profondeur actuel
-        depth = dirpath[len(root_dir):].count(os.sep)
-        if depth > level:
-            # Si on dépasse le niveau spécifié, arrêter
-            dirnames[:] = []  # Ne pas entrer dans les sous-dossiers
-            continue
-
-        # Ajouter les fichiers du niveau en cours
-        for filename in filenames:
-            try:
-                file_path = os.path.join(dirpath, filename)
-                file_stats = os.stat(file_path)
-                # Stocker le chemin relatif pour comparaison
-                relative_path = os.path.relpath(file_path, root_dir)
-                files[relative_path] = {
-                    'path': file_path,
-                    'size': file_stats.st_size,
-                    'modified_time': file_stats.st_mtime
-                }
-            except Exception as e:
-                with open('comparaison_fichiers.txt', 'a') as output_file:
-                    output_file.write(f"Erreur lors de la lecture du fichier {filename} dans {dirpath}: {e}\n")
-    return files
-
-def comparer_dossiers_iteratif(dossier_a, dossier_b):
-    """Comparer les dossiers A et B niveau par niveau de manière itérative."""
-    
-    # Pile de dossiers à comparer sous forme de tuples (dossier_A, dossier_B, niveau)
-    pile = [(dossier_a, dossier_b, 0)]
-    
-    # Ensemble pour garder la trace des dossiers visités
-    visited = set()
-    
-    # Préparation du fichier de sortie
-    with open('comparaison_fichiers.txt', 'a') as output_file:
-        output_file.write("Début de la comparaison\n\n")
-
-    while pile:
-        current_a, current_b, level = pile.pop()
-
-        # Si ces dossiers ont déjà été visités, on les ignore
-        if (current_a, current_b) in visited:
-            continue
+def scan_directory(dir_path):
+    files_dict = {}
+    dirs_dict = set()
+    for root, dirs, files in os.walk(dir_path):
+        relative_dir = os.path.relpath(root, dir_path)
+        dirs_dict.add(relative_dir)
         
-        # Marquer les dossiers comme visités
-        visited.add((current_a, current_b))
-        
-        # Scanner le niveau courant de A et B
-        fichiers_a = scan_directory_at_level(current_a, level)
-        fichiers_b = scan_directory_at_level(current_b, level)
+        for file in files:
+            file_path = os.path.join(root, file)
+            relative_path = os.path.relpath(file_path, dir_path)
+            file_info = {
+                'path': file_path,
+                'mod_time': os.path.getmtime(file_path),
+                'size': os.path.getsize(file_path)
+            }
+            files_dict[relative_path] = file_info
+    return files_dict, dirs_dict
 
-        # Comparer les fichiers au niveau actuel
-        with open('comparaison_fichiers.txt', 'a') as output_file:
-            for fichier in fichiers_a:
-                # Comparer les fichiers de A avec ceux de B
-                if fichier in fichiers_b:
-                    stats_a = fichiers_a[fichier]
-                    stats_b = fichiers_b[fichier]
+def compare_files(file_a, file_b):
+    if file_a['mod_time'] != file_b['mod_time']:
+        return 'Modification date differs'
+    elif file_a['size'] != file_b['size']:
+        return 'File size differs'
+    else:
+        return 'Files are identical'
 
-                    date_a = datetime.fromtimestamp(stats_a['modified_time'])
-                    date_b = datetime.fromtimestamp(stats_b['modified_time'])
-                    taille_a = stats_a['size']
-                    taille_b = stats_b['size']
+def generate_report(dir_a, dir_b, report_file):
+    files_a, dirs_a = scan_directory(dir_a)
+    files_b, dirs_b = scan_directory(dir_b)
 
-                    if date_a < date_b:
-                        output_file.write(f"{fichier}: Plus ancien dans {current_a} que dans {current_b}\n")
-                    elif date_a > date_b:
-                        if taille_b > taille_a:
-                            output_file.write(f"{fichier}: Plus récent dans {current_a} mais plus léger que dans {current_b}\n")
-                        else:
-                            output_file.write(f"{fichier}: Plus récent dans {current_a} et plus lourd ou égal que dans {current_b}\n")
-                else:
-                    output_file.write(f"{fichier}: Présent dans {current_a} mais absent de {current_b} au niveau {level}\n")
+    with open(report_file, 'w') as report:
+        # Comparer les fichiers
+        for relative_path, file_info_a in files_a.items():
+            if relative_path in files_b:
+                file_info_b = files_b[relative_path]
+                comparison_result = compare_files(file_info_a, file_info_b)
+                report.write(f"File: {relative_path}\n")
+                report.write(f" - {comparison_result}\n")
+            else:
+                report.write(f"File: {relative_path} is missing in {dir_b}\n")
 
-            # Ajouter les sous-dossiers communs pour une future comparaison au prochain niveau
-            for fichier in fichiers_a:
-                dossier_parent_a = os.path.dirname(os.path.join(current_a, fichier))  # Correction ici pour obtenir le chemin complet
-                dossier_parent_b = os.path.join(current_b, os.path.basename(dossier_parent_a))  # Correction ici pour éviter os.path.relpath
+        for relative_path, file_info_b in files_b.items():
+            if relative_path not in files_a:
+                report.write(f"File: {relative_path} is missing in {dir_a}\n")
 
-                # Vérification avant d'ajouter à la pile
-                if os.path.exists(dossier_parent_b) and os.path.isdir(dossier_parent_b):
-                    pile.append((dossier_parent_a, dossier_parent_b, level + 1))
+        # Comparer les sous-dossiers manquants dans B mais présents dans A
+        for relative_dir in dirs_a:
+            if relative_dir not in dirs_b:
+                report.write(f"Directory: {relative_dir} is missing in {dir_b}\n")
 
 if __name__ == "__main__":
-    # Chemins des dossiers à comparer
-    dossier_a = r"\\eDossier\sdossier\tdossier\rdossier\Hdossier dossier dossier"
-    dossier_b = r"\\eDossier\sdossier\tdossier\rdossier\Hdossier dossier dossier B"
+    directory_a = "dossier_a"
+    directory_b = "dossier_b"
+    report_path = "comparison_report.txt"
 
-    # Lancer la comparaison et écrire les résultats dans un fichier texte
-    comparer_dossiers_iteratif(dossier_a, dossier_b)
-
-    print("Comparaison terminée ! Résultats enregistrés dans 'comparaison_fichiers.txt'.")
+    generate_report(directory_a, directory_b, report_path)

@@ -1,60 +1,72 @@
-import os
-import filecmp
-from datetime import datetime
+import requests
+import pandas as pd
 
-def scan_directory(dir_path):
-    files_dict = {}
-    dirs_dict = set()
-    for root, dirs, files in os.walk(dir_path):
-        relative_dir = os.path.relpath(root, dir_path)
-        dirs_dict.add(relative_dir)
-        
-        for file in files:
-            file_path = os.path.join(root, file)
-            relative_path = os.path.relpath(file_path, dir_path)
-            file_info = {
-                'path': file_path,
-                'mod_time': os.path.getmtime(file_path),
-                'size': os.path.getsize(file_path)
+# Fonction pour récupérer les workspaces via l'API de Kantree
+def get_workspaces(api_key):
+    url = "https://api.kantree.io/v1/me/projects"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+    }
+    response = requests.get(url, headers=headers)
+    return response.json()
+
+# Fonction pour récupérer les cartes d'un workspace
+def get_workspace_cards(api_key, workspace_id):
+    url = f"https://api.kantree.io/v1/projects/{workspace_id}/cards"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+    }
+    response = requests.get(url, headers=headers)
+    return response.json()
+
+# Fonction pour parcourir les champs de chaque carte et extraire tous les intitulés possibles
+def extract_data_to_excel(api_key):
+    workspaces = get_workspaces(api_key)
+    
+    # Une liste pour stocker toutes les données globales
+    all_data = []
+    
+    # Ensemble pour stocker tous les intitulés de champs différents
+    all_columns = set()
+
+    # Parcours de tous les workspaces
+    for workspace in workspaces:
+        workspace_id = workspace['id']
+        workspace_name = workspace['name']
+        cards = get_workspace_cards(api_key, workspace_id)
+
+        # Parcours de toutes les cartes dans le workspace
+        for card in cards:
+            card_data = {
+                'Workspace': workspace_name,
+                'Card ID': card['id'],
+                'Card Title': card['title'],
             }
-            files_dict[relative_path] = file_info
-    return files_dict, dirs_dict
+            
+            # Parcourir les champs de la carte et les ajouter au dictionnaire
+            for field in card.get('fields', []):
+                field_name = field.get('label', 'Unknown Field')
+                field_value = field.get('value', '')
+                card_data[field_name] = field_value
+                # Ajouter chaque intitulé de champ unique à l'ensemble des colonnes
+                all_columns.add(field_name)
+            
+            all_data.append(card_data)
+    
+    # Convertir la liste des données en DataFrame pandas
+    df = pd.DataFrame(all_data)
 
-def compare_files(file_a, file_b):
-    if file_a['mod_time'] != file_b['mod_time']:
-        return 'Modification date differs'
-    elif file_a['size'] != file_b['size']:
-        return 'File size differs'
-    else:
-        return 'Files are identical'
+    # Ajouter toutes les colonnes manquantes à partir de l'ensemble all_columns
+    for col in all_columns:
+        if col not in df.columns:
+            df[col] = ''
 
-def generate_report(dir_a, dir_b, report_file):
-    files_a, dirs_a = scan_directory(dir_a)
-    files_b, dirs_b = scan_directory(dir_b)
+    # Exporter vers un fichier Excel
+    df.to_excel('kantree_data_extract.xlsx', index=False)
+    print("Extraction réussie dans kantree_data_extract.xlsx")
 
-    with open(report_file, 'w') as report:
-        # Comparer les fichiers
-        for relative_path, file_info_a in files_a.items():
-            if relative_path in files_b:
-                file_info_b = files_b[relative_path]
-                comparison_result = compare_files(file_info_a, file_info_b)
-                report.write(f"File: {relative_path}\n")
-                report.write(f" - {comparison_result}\n")
-            else:
-                report.write(f"File: {relative_path} is missing in {dir_b}\n")
+# Remplacer par ton propre token API de Kantree
+API_KEY = 'TON_API_KEY_ICI'
 
-        for relative_path, file_info_b in files_b.items():
-            if relative_path not in files_a:
-                report.write(f"File: {relative_path} is missing in {dir_a}\n")
-
-        # Comparer les sous-dossiers manquants dans B mais présents dans A
-        for relative_dir in dirs_a:
-            if relative_dir not in dirs_b:
-                report.write(f"Directory: {relative_dir} is missing in {dir_b}\n")
-
-if __name__ == "__main__":
-    directory_a = "dossier_a"
-    directory_b = "dossier_b"
-    report_path = "comparison_report.txt"
-
-    generate_report(directory_a, directory_b, report_path)
+# Appel de la fonction d'extraction
+extract_data_to_excel(API_KEY)

@@ -1,32 +1,27 @@
-# Mon Expérience au sein de TAS à Toulouse
+# Mon Intégration au sein de l'Entreprise
 
-## Contexte
+## Découverte de l'Environnement
 
-J'ai rejoint TAS sur le site de Toulouse, au sein du **CCEL** (Centre de Compétence Électronique L), plus spécifiquement dans la **LPH** (Ligne Produit Hyperfréquence), dans le pôle **transformation numérique**.
+Ce qui m’a surpris, c’est l'effervescence de l’entreprise. La présence d'un grand nombre d'employés est impressionnante. Bien que je m’attendais à une grande masse salariale, voir cela en vrai est très différent des chiffres affichés sur un écran. Malgré la taille de l’entreprise, l’organisation est efficace, et tout fonctionne de manière parfaitement coordonnée. Je suis agréablement surpris par la qualité de travail et d’organisation que la direction et les chefs de pôle ont réussi à instaurer.
 
-## Mes Missions
+## Les Services Offerts
 
-### Développement Informatique
+### La Cantine
 
-Au sein de l’équipe, j'ai été chargé de faire du développement informatique dans divers langages de programmation, principalement en **Python**. Ce langage est fondamental dans le développement, largement répandu et accessible.
+La diversité des choix à la cantine est immense. Je pensais que gérer un large éventail de repas serait compliqué en raison du volume d'employés, mais la variété est réellement impressionnante. 
 
-### Projets Réalisés
+### Le CSE
 
-1. **Gestion de Disques Réseau**
-   - **Problématique** : Un problème d’architecture réseau avait conduit à un duplicata d'un disque réseau.
-   - **Solution** : J'ai développé un script Python qui compare l’arborescence des deux disques et les fichiers présents. Ce script permet d’indiquer aux utilisateurs les actions à entreprendre pour déplacer les fichiers, afin de supprimer le duplicata inutile et de consolider les données sur un seul disque.
+Le Comité Social et Économique (CSE) propose une multitude de services, que ce soit au quotidien ou sur le long terme. J'ai découvert une gamme d’offres si vaste que cela peut être déroutant : profiter des tarifs avantageux pour la salle de sport, s'intéresser aux activités associatives ou explorer d'autres services et avantages. Les possibilités sont nombreuses et enrichissantes.
 
-2. **Amélioration de l’Application de Gestion (Kantree)**
-   - **Problématique** : L’application utilisée par l’entreprise, **Kantree**, rencontrait des problèmes de sauvegarde et de sécurité des données. En cas de défaillance, des paquets entiers de données pouvaient être perdus, entraînant une perte de travail considérable.
-   - **Solution** : Un système automatique de backup avait été mis en place, mais il présentait des défaillances. J'ai été chargé de réparer ce système. Après avoir envisagé plusieurs options :
-     - Réparer l’existant.
-     - Refaire l’existant en mieux.
-     - Prendre un chemin détourné.
+## Intégration dans l’Équipe
 
-   J'ai initialement exploré la troisième option, mais après discussion avec mon équipe, j'ai opté pour la première et la seconde. J'ai donc travaillé sur la manipulation de l’API de Kantree pour automatiser la récupération des données. Cela a nécessité des efforts considérables pour transformer et packager les données afin qu'elles soient exploitables et lisibles.
+L'intégration dans l'entreprise, le service et l’équipe a été très fluide. J'ai pu être opérationnel dès mon deuxième jour, ce qui a été une chance incroyable. Les employés me considèrent comme un membre à part entière, sans distinction de statut entre CDI, CDD, alternants ou chefs d’équipe. Cela favorise les échanges et diminue les barrières liées aux différents postes.
 
-   Ce projet a constitué un véritable défi, car mes connaissances en API étaient limitées. J'ai donc dû suivre des cours fondamentaux et expérimenter pour progresser et faire fonctionner le système.
+### Réunions Hebdomadaires
 
-## Conclusion
+Mon service a une réunion hebdomadaire tous les mercredis, où les chefs d’équipes partagent les actualités et les projets. Un segment est dédié aux alternants, et nous avons l'occasion de nous présenter. Lors de ma première réunion, avec un collègue alternant, nous avons décidé de participer activement à cette tradition.
 
-Mon expérience au sein de TAS m’a permis d’acquérir des compétences solides en développement, en gestion de projets et en résolution de problèmes techniques. J'ai hâte de continuer à relever de nouveaux défis dans le domaine de la transformation numérique.
+### Ambiance Équipe
+
+L’ambiance au sein de mon équipe est formidable. Elle est assez petite, ce qui facilite les échanges et l'élargissement de nos horizons. La moyenne d’âge est relativement basse (environ 23 ans), ce qui favorise les interactions et les discussions. J’ai rapidement trouvé ma place, participant aux routines et activités collectives de l’équipe, et je me sens pleinement intégré comme un membre à part entière.

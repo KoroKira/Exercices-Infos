@@ -1,26 +1,32 @@
-# Présentation de l'entreprise : Thales Alenia Space
+# Mon Expérience au sein de TAS à Toulouse
 
-## Fondation et mission  
-Fondée le 10 avril 2007, Thales Alenia Space (TAS) se consacre à l'idée que l'espace peut apporter une nouvelle dimension à l'humanité pour construire une vie meilleure et durable sur Terre. Cette vision guide toutes les activités de l’entreprise.
+## Contexte
 
-## Activités principales  
-Thales Alenia Space se positionne comme un acteur clé du secteur spatial, fournissant aux institutions, gouvernements et entreprises des systèmes satellitaires innovants. Ces systèmes permettent la géolocalisation des personnes et des objets, l’observation de la Terre, ainsi que l’optimisation des ressources terrestres et spatiales. TAS est structurée autour de deux principales lignes d’activité :
-- **Observation, Exploration et Navigation (OEN)**
-- **Télécommunications**
+J'ai rejoint TAS sur le site de Toulouse, au sein du **CCEL** (Centre de Compétence Électronique L), plus spécifiquement dans la **LPH** (Ligne Produit Hyperfréquence), dans le pôle **transformation numérique**.
 
-## Positionnement dans l'industrie spatiale  
-Thales Alenia Space est une coentreprise entre Thales (67%) et Leonardo (33%), spécialisée dans la conception et la fabrication de satellites. L’entreprise offre des solutions technologiques avancées dans plusieurs domaines : télécommunications, navigation par satellite, observation de la Terre, surveillance de l’environnement, exploration spatiale et infrastructures orbitales.
+## Mes Missions
 
-En collaborant avec ses clients (gouvernements, institutions, agences spatiales, opérateurs de télécommunications), TAS leur permet de se connecter, de sécuriser leurs systèmes, de protéger et observer la planète, ainsi que d’explorer l’espace. En partenariat avec Telespazio, TAS forme la **Space Alliance**, offrant ainsi une gamme complète de services spatiaux.
+### Développement Informatique
 
-## Chiffres clés  
-En 2023, TAS a réalisé un chiffre d'affaires de **2,2 milliards d’euros**. L’entreprise emploie environ **8600 personnes** réparties sur **18 sites** dans **10 pays**, dont **17 en Europe** et **1 aux États-Unis** :
-- **Europe** : Madrid, Toulouse, Cannes, Zurich, Luxembourg, Charleroi, Louvain, Hasselt, Stuttgart, Varsovie, Turin, Gorgonzola, Rome, L’Aquila, Bristol, Harwell, Belfast
-- **États-Unis** : Seattle
+Au sein de l’équipe, j'ai été chargé de faire du développement informatique dans divers langages de programmation, principalement en **Python**. Ce langage est fondamental dans le développement, largement répandu et accessible.
 
-## Implantations en France  
-En France, TAS possède deux sites principaux :
-- **Toulouse** : Avec 2630 employés, ce site de 9500 m² est spécialisé dans l’ingénierie des systèmes de télécommunication et de navigation, ainsi que dans la conception et la réalisation de charges utiles télécom et d’observation. Il se concentre également sur le développement de segments sol (hardware et software), la recherche en communication quantique et classique, l'intelligence artificielle, la science des données, et le programme **Space Business Catalyst**.
-- **Cannes** : Plus centré sur l'assemblage et la conception des systèmes issus de Toulouse, ce site compte 1780 employés et possède une salle blanche de 15 000 m².
+### Projets Réalisés
 
-Tous ces sites, répartis à travers le monde, travaillent ensemble dans une vision commune : faire avancer la technologie spatiale. Cette collaboration est illustrée par le motto de l’entreprise : **#SPACEFORLIFE**.
+1. **Gestion de Disques Réseau**
+   - **Problématique** : Un problème d’architecture réseau avait conduit à un duplicata d'un disque réseau.
+   - **Solution** : J'ai développé un script Python qui compare l’arborescence des deux disques et les fichiers présents. Ce script permet d’indiquer aux utilisateurs les actions à entreprendre pour déplacer les fichiers, afin de supprimer le duplicata inutile et de consolider les données sur un seul disque.
+
+2. **Amélioration de l’Application de Gestion (Kantree)**
+   - **Problématique** : L’application utilisée par l’entreprise, **Kantree**, rencontrait des problèmes de sauvegarde et de sécurité des données. En cas de défaillance, des paquets entiers de données pouvaient être perdus, entraînant une perte de travail considérable.
+   - **Solution** : Un système automatique de backup avait été mis en place, mais il présentait des défaillances. J'ai été chargé de réparer ce système. Après avoir envisagé plusieurs options :
+     - Réparer l’existant.
+     - Refaire l’existant en mieux.
+     - Prendre un chemin détourné.
+
+   J'ai initialement exploré la troisième option, mais après discussion avec mon équipe, j'ai opté pour la première et la seconde. J'ai donc travaillé sur la manipulation de l’API de Kantree pour automatiser la récupération des données. Cela a nécessité des efforts considérables pour transformer et packager les données afin qu'elles soient exploitables et lisibles.
+
+   Ce projet a constitué un véritable défi, car mes connaissances en API étaient limitées. J'ai donc dû suivre des cours fondamentaux et expérimenter pour progresser et faire fonctionner le système.
+
+## Conclusion
+
+Mon expérience au sein de TAS m’a permis d’acquérir des compétences solides en développement, en gestion de projets et en résolution de problèmes techniques. J'ai hâte de continuer à relever de nouveaux défis dans le domaine de la transformation numérique.

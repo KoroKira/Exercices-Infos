@@ -88,12 +88,12 @@ class Main:
             print()  # Ligne vide pour séparer les cartes visuellement
 
 # Exemple d'utilisation
-deck = Deck()
-main_joueur = Main()
+#deck = Deck()
+#main_joueur = Main()
 
-main_joueur.ajouter_carte(deck.tirer())
-main_joueur.ajouter_carte(deck.tirer())
+#main_joueur.ajouter_carte(deck.tirer())
+#main_joueur.ajouter_carte(deck.tirer())
 
-print("Main du joueur :")
-main_joueur.afficher_main()
-print("Valeur de la main :", main_joueur.valeur())
+#print("Main du joueur :")
+#main_joueur.afficher_main()
+#print("Valeur de la main :", main_joueur.valeur())

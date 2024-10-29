@@ -1,0 +1,177 @@
+{
+    "question": "Est-ce un mammif\u00e8re?",
+    "yes": {
+        "question": "Est-ce un carnivore?",
+        "yes": {
+            "question": "Vit-il dans la savane?",
+            "yes": {
+                "animal": "lion"
+            },
+            "no": {
+                "question": "Est-il domestique?",
+                "yes": {
+                    "animal": "chat"
+                },
+                "no": {
+                    "animal": "tigre"
+                }
+            }
+        },
+        "no": {
+            "question": "Est-il herbivore?",
+            "yes": {
+                "question": "Vit-il en Afrique?",
+                "yes": {
+                    "question": "A-t-il une trompe?",
+                    "yes": {
+                        "animal": "\u00e9l\u00e9phant"
+                    },
+                    "no": {
+                        "animal": "z\u00e8bre"
+                    }
+                },
+                "no": {
+                    "question": "Est-il domestique?",
+                    "yes": {
+                        "animal": "vache"
+                    },
+                    "no": {
+                        "question": "A-t-il des cornes?",
+                        "yes": {
+                            "animal": "bison"
+                        },
+                        "no": {
+                            "animal": "cheval"
+                        }
+                    }
+                }
+            },
+            "no": {
+                "question": "Est-ce un rongeur?",
+                "yes": {
+                    "question": "Est-il petit?",
+                    "yes": {
+                        "animal": "souris"
+                    },
+                    "no": {
+                        "animal": "castor"
+                    }
+                },
+                "no": {
+                    "question": "A-t-il des rayures?",
+                    "yes": {
+                        "animal": "z\u00e8bre"
+                    },
+                    "no": {
+                        "animal": "singe"
+                    }
+                }
+            }
+        }
+    },
+    "no": {
+        "question": "Est-ce un oiseau?",
+        "yes": {
+            "question": "Est-il capable de voler?",
+            "yes": {
+                "question": "Vit-il pr\u00e8s de la mer?",
+                "yes": {
+                    "animal": "mouette"
+                },
+                "no": {
+                    "question": "Est-il color\u00e9?",
+                    "yes": {
+                        "animal": "perroquet"
+                    },
+                    "no": {
+                        "animal": "aigle"
+                    }
+                }
+            },
+            "no": {
+                "question": "Vit-il pr\u00e8s de l'eau?",
+                "yes": {
+                    "animal": "pingouin"
+                },
+                "no": {
+                    "animal": "autruche"
+                }
+            }
+        },
+        "no": {
+            "question": "Est-ce un reptile?",
+            "yes": {
+                "question": "A-t-il des pattes?",
+                "yes": {
+                    "question": "Peut-il changer de couleur?",
+                    "yes": {
+                        "animal": "cam\u00e9l\u00e9on"
+                    },
+                    "no": {
+                        "animal": "l\u00e9zard"
+                    }
+                },
+                "no": {
+                    "question": "Est-ce qu'il siffle?",
+                    "yes": {
+                        "animal": "serpent"
+                    },
+                    "no": {
+                        "animal": "crocodile"
+                    }
+                }
+            },
+            "no": {
+                "question": "Vit-il dans l'eau?",
+                "yes": {
+                    "question": "Est-il tr\u00e8s grand?",
+                    "yes": {
+                        "animal": "baleine"
+                    },
+                    "no": {
+                        "question": "A-t-il des tentacules?",
+                        "yes": {
+                            "animal": "poulpe"
+                        },
+                        "no": {
+                            "question": "A-t-il une carapace?",
+                            "yes": {
+                                "animal": "tortue"
+                            },
+                            "no": {
+                                "question": "est ce un batracien ?",
+                                "yes": {
+                                    "animal": "grenouille"
+                                },
+                                "no": {
+                                    "animal": "poisson"
+                                }
+                            }
+                        }
+                    }
+                },
+                "no": {
+                    "question": "A-t-il des pattes poilues?",
+                    "yes": {
+                        "animal": "araign\u00e9e"
+                    },
+                    "no": {
+                        "question": "Est-il un insecte?",
+                        "yes": {
+                            "question": "A-t-il des ailes?",
+                            "yes": {
+                                "animal": "papillon"
+                            },
+                            "no": {
+                                "animal": "fourmi"
+                            }
+                        },
+                        "no": {
+                            "animal": "escargot"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

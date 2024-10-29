@@ -1,0 +1,70 @@
+# Minecraft Building Materials Checklist
+
+- [ ] **Grass** x 870
+- [ ] **Dirt** x 1378
+- [ ] **Tallgrass** x 166
+- [ ] **Stone** x 1545
+- [ ] **Flower Rose** x 55
+- [ ] **Double Plant Fern (Bottom)** x 198
+- [ ] **Stone Brick Stairs** x 221
+- [ ] **Stone Brick** x 1681
+- [ ] **Spruce Fence** x 43
+- [ ] **Vine** x 9
+- [ ] **Iron Bars** x 13
+- [ ] **Glass Pane** x 52
+- [ ] **Wooden Slab** x 740
+- [ ] **Dark Oak Stairs** x 243
+- [ ] **Chest** x 31
+- [ ] **Oak Wood Planks** x 793
+- [ ] **Monster Egg** x 343
+- [ ] **Crafting Table** x 8
+- [ ] **Dark Oak Fence** x 86
+- [ ] **Torch** x 120
+- [ ] **Spruce Stairs** x 95
+- [ ] **Wood** x 143
+- [ ] **Carpet** x 229
+- [ ] **Oak Wood Stairs** x 26
+- [ ] **Double Wooden Slab** x 33
+- [ ] **Cobblestone** x 655
+- [ ] **Bookshelf** x 51
+- [ ] **Birch Stairs** x 24
+- [ ] **Jungle Stairs** x 28
+- [ ] **Melon Block** x 4
+- [ ] **Pumpkin** x 1
+- [ ] **Skull** x 4
+- [ ] **Stone Slab** x 168
+- [ ] **Furnace** x 8
+- [ ] **Wall Banner** x 15
+- [ ] **Spruce Door** x 36
+- [ ] **Bed** x 22
+- [ ] **Fence** x 33
+- [ ] **Ladder** x 20
+- [ ] **Oak Sapling** x 1
+- [ ] **Gravel** x 149
+- [ ] **Jungle Door** x 2
+- [ ] **Dark Oak Door** x 6
+- [ ] **Cauldron** x 5
+- [ ] **Glowstone** x 32
+- [ ] **Leaves** x 274
+- [ ] **Flower Pot** x 10
+- [ ] **Jukebox** x 2
+- [ ] **Brewing Stand** x 3
+- [ ] **Acacia Door** x 4
+- [ ] **Water** x 16
+- [ ] **Spruce Fence Gate** x 2
+- [ ] **Wooden Pressure Plate** x 2
+- [ ] **Anvil** x 1
+- [ ] **Hay Bale** x 14
+- [ ] **Acacia Log** x 60
+- [ ] **Dispenser** x 7
+- [ ] **Wooden Button** x 7
+- [ ] **Hardened Clay (Stained)** x 5
+- [ ] **Red Sandstone Slab** x 73
+- [ ] **Trapped Chest** x 2
+- [ ] **Trapdoor** x 1
+- [ ] **Cobblestone Wall** x 8
+- [ ] **Lever** x 2
+- [ ] **Iron Door** x 4
+- [ ] **Double Stone Slab** x 4
+- [ ] **Enchanting Table** x 1
+- [ ] **Plane** x 1

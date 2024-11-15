@@ -9,7 +9,7 @@ class Blackjack:
         self.deck = Deck()
         self.joueur = Joueur("Joueur")
         self.croupier = Croupier()
-
+        
     def distribuer_cartes(self):
         # Distribuer 2 cartes au joueur et au croupier
         for _ in range(2):

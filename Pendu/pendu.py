@@ -86,3 +86,4 @@ def play_hangman():
 # Lancer le jeu
 if __name__ == "__main__":
     play_hangman()
+    

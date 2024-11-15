@@ -10,10 +10,22 @@
             "no": {
                 "question": "Est-il domestique?",
                 "yes": {
-                    "animal": "chat"
+                    "question": "est ce qu'il est fid\u00e8le \u00e0 l'homme ?",
+                    "yes": {
+                        "animal": "chien"
+                    },
+                    "no": {
+                        "animal": "chat"
+                    }
                 },
                 "no": {
-                    "animal": "tigre"
+                    "question": "est-il bip\u00e8de ?",
+                    "yes": {
+                        "animal": "singe"
+                    },
+                    "no": {
+                        "animal": "tigre"
+                    }
                 }
             }
         },
@@ -41,7 +53,13 @@
                             "animal": "bison"
                         },
                         "no": {
-                            "animal": "cheval"
+                            "question": "est-ce que ca vit dans la terre ?",
+                            "yes": {
+                                "animal": "taupe"
+                            },
+                            "no": {
+                                "animal": "cheval"
+                            }
                         }
                     }
                 }

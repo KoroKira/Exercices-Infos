@@ -93,14 +93,14 @@ class BlackjackConsole(Blackjack):
 
     def lire_joueurs(self):
         """Lit tous les joueurs à partir du fichier JSON."""
-        if os.path.exists("joueur_donnees.json"):
-            with open("joueur_donnees.json", "r") as f:
+        if os.path.exists("/Users/guilhem/Documents/GitHub/Exercices-Infos/BlackJack/joueur_donnees.json"):
+            with open("/Users/guilhem/Documents/GitHub/Exercices-Infos/BlackJack/joueur_donnees.json", "r") as f:
                 return json.load(f)
         return []
 
     def ecrire_joueurs(self, joueurs):
         """Écrit la liste de tous les joueurs dans le fichier JSON."""
-        with open("joueur_donnees.json", "w") as f:
+        with open("/Users/guilhem/Documents/GitHub/Exercices-Infos/BlackJack/joueur_donnees.json", "w") as f:
             json.dump(joueurs, f)
 
     def sauvegarder_joueur(self, joueur):
@@ -137,69 +137,61 @@ class BlackjackConsole(Blackjack):
                 return actions[choix]
             else:
                 print("Choix invalide. Veuillez réessayer.")
+
     def play_game(self):
+        print("\nDébut du jeu de Blackjack avec gestion des mises !")
+        self.demander_mise()
+        self.distribuer_cartes()
+
+        # Tour du joueur
         while True:
-            print("\nDébut du jeu de Blackjack avec gestion des mises !")
-            self.demander_mise()
-            self.distribuer_cartes()
-
-            # Tour du joueur
-            while True:
-                self.afficher_mains()
-                action = self.demander_action()
-                if action == "hit":
-                    self.joueur.hit(self.deck)
-                    if self.joueur.valeur_main() > 21:
-                        print("Le joueur a dépassé 21. Vous perdez !")
-                        self.joueur.perdre()
-                        self.sauvegarder_joueur(self.joueur)
-                        break
-                elif action == "stand":
+            self.afficher_mains()
+            action = self.demander_action()
+            if action == "hit":
+                self.joueur.hit(self.deck)
+                if self.joueur.valeur_main() > 21:
+                    print("Le joueur a dépassé 21. Vous perdez !")
+                    self.joueur.perdre()
+                    self.sauvegarder_joueur(self.joueur)
                     break
-                elif action == "double_down":
-                    if not self.joueur.double_down():
-                        continue  # Si on ne peut pas doubler, re-demander l'action
-                    self.joueur.hit(self.deck)
-                    if self.joueur.valeur_main() > 21:
-                        print("Le joueur a dépassé 21 après avoir doublé la mise. Vous perdez !")
-                        self.joueur.perdre()
-                        self.sauvegarder_joueur(self.joueur)
-                        break
+            elif action == "stand":
+                break
+            elif action == "double_down":
+                if not self.joueur.double_down():
+                    continue  # Si on ne peut pas doubler, re-demander l'action
+                self.joueur.hit(self.deck)
+                if self.joueur.valeur_main() > 21:
+                    print("Le joueur a dépassé 21 après avoir doublé la mise. Vous perdez !")
+                    self.joueur.perdre()
+                    self.sauvegarder_joueur(self.joueur)
                     break
-
-            # Tour du croupier
-            print("\nTour du croupier...")
-            self.croupier.jouer(self.deck)
-
-            # Afficher toutes les mains
-            print("\nMains finales :")
-            self.afficher_mains(show_croupier=True)
-
-            # Comparer les mains pour déterminer le gagnant
-            joueur_valeur = self.joueur.valeur_main()
-            croupier_valeur = self.croupier.valeur_main()
-
-            if croupier_valeur > 21 or joueur_valeur > croupier_valeur:
-                print("Vous gagnez !")
-                self.joueur.gagner()
-            elif joueur_valeur < croupier_valeur:
-                print("Le croupier gagne !")
-                self.joueur.perdre()
-            else:
-                print("Égalité !")
-                self.joueur.egalite()
-
-            # Sauvegarde des données après la partie
-            print("Partie terminée. Au revoir, {} !".format(self.joueur.nom))
-            self.sauvegarder_joueur(self.joueur)
-
-            # Demander si le joueur veut rejouer
-            rejouer = input("Pour récupérer vos gains, faites o : ")
-            if rejouer.lower() != 'o':
-                print("Merci d'avoir joué ! L'addiction au jeu est dangereuse pour la santé.")
                 break
 
-# Exemple d'utilisation
-#if __name__ == "__main__":
-#    jeu = BlackjackConsole()
-#    jeu.play_game()
+        # Tour du croupier
+        print("\nTour du croupier...")
+        self.croupier.jouer(self.deck)
+
+        # Afficher toutes les mains
+        print("\nMains finales :")
+        self.afficher_mains(show_croupier=True)
+
+        # Comparer les mains pour déterminer le gagnant
+        joueur_valeur = self.joueur.valeur_main()
+        croupier_valeur = self.croupier.valeur_main()
+
+        if croupier_valeur > 21 or joueur_valeur > croupier_valeur:
+            print("Vous gagnez !")
+            self.joueur.gagner()
+        elif joueur_valeur < croupier_valeur:
+            print("Le croupier gagne !")
+            self.joueur.perdre()
+        else:
+            print("Égalité !")
+            self.joueur.egalite()
+
+        # Sauvegarde des données après la partie
+        print("Partie terminée. Au revoir, {} !".format(self.joueur.nom))
+        self.sauvegarder_joueur(self.joueur)
+
+        # Fin du jeu
+        print("Merci d'avoir joué ! L'addiction au jeu est dangereuse pour la santé.")

@@ -1,0 +1,316 @@
+<h1>Cheatsheet Python - Sommaire</h1>
+<h2>1. Structures conditionnelles et répétitives</h2>
+<h3>1.1. Instructions <code>if/else</code> et opérateurs logiques</h3>
+<h3>1.2. Boucles <code>for</code> et <code>while</code></h3>
+<h3>1.3. Instructions de contrôle de boucle (<code>break</code>, <code>continue</code>, <code>else</code> dans les boucles)</h3>
+<h2>2. Chaînes de caractères</h2>
+<h3>2.1. Opérations de base sur les chaînes (<code>len</code>, concaténation, slicing)</h3>
+<h3>2.2. Méthodes courantes (<code>split</code>, <code>join</code>, <code>replace</code>, <code>upper</code>, <code>lower</code>)</h3>
+<h3>2.3. F-strings et formatage</h3>
+<h2>3. Listes</h2>
+<h3>3.1. Création et manipulation de listes</h3>
+<h3>3.2. Méthodes courantes (<code>append</code>, <code>remove</code>, <code>sort</code>, <code>reverse</code>, <code>index</code>)</h3>
+<h3>3.3. List comprehensions</h3>
+<h2>4. Dictionnaires</h2>
+<h3>4.1. Création et manipulation de dictionnaires</h3>
+<h3>4.2. Méthodes courantes (<code>keys</code>, <code>values</code>, <code>items</code>, <code>get</code>)</h3>
+<h3>4.3. Boucles sur les dictionnaires</h3>
+<h2>5. Procédures et fonctions</h2>
+<h3>5.1. Définir des fonctions avec <code>def</code></h3>
+<h3>5.2. Paramètres (obligatoires, optionnels, <code>*args</code>, <code>**kwargs</code>)</h3>
+<h3>5.3. Valeurs de retour et portée des variables</h3>
+<h2>6. Manipulation des fichiers</h2>
+<h3>6.1. Ouverture et fermeture de fichiers (<code>open</code>, <code>close</code>)</h3>
+<h3>6.2. Modes d'ouverture (<code>r</code>, <code>w</code>, <code>a</code>, <code>r+</code>)</h3>
+<h3>6.3. Lecture et écriture dans les fichiers (<code>read</code>, <code>readline</code>, <code>write</code>)</h3>
+<h3>6.4. Gestion des fichiers avec <code>with</code></h3>
+<h2>7. Outils pratiques</h2>
+<h3>7.1. Fonctions intégrées (<code>range</code>, <code>enumerate</code>, <code>zip</code>, <code>map</code>, <code>filter</code>)</h3>
+<h3>7.2. Gestion des erreurs avec <code>try/except</code></h3>
+<h3>7.3. Importation de modules (<code>math</code>, <code>os</code>, <code>json</code>)</h3>
+<h1>1. Structures conditionnelles et répétitives</h1>
+<h2>1.1. Instructions <code>if/else</code> et opérateurs logiques</h2>
+<p><code>python
+if condition1:
+    # Instructions si condition1 vraie
+elif condition2:
+    # Instructions si condition2 vraie
+else:
+    # Instructions si aucune condition vraie</code></p>
+<p>Opérateurs logiques : <code>and</code>, <code>or</code>, <code>not</code></p>
+<h2>1.2. Boucles <code>for</code> et <code>while</code></h2>
+<p>```python
+for element in sequence:
+    # Instructions exécutées pour chaque élément de la séquence</p>
+<p>while condition:
+    # Instructions exécutées tant que la condition est vraie
+```</p>
+<h2>1.3. Instructions de contrôle de boucle</h2>
+<ul>
+<li><code>break</code> : sortir de la boucle</li>
+<li><code>continue</code> : passer à l'itération suivante</li>
+<li><code>else</code> dans les boucles : instructions exécutées si la boucle se termine normalement (sans <code>break</code>)
+<code>python
+for element in sequence:
+    if condition:
+        break  # Sortir de la boucle
+    if condition:
+        continue  # Passer à l'itération suivante
+else:
+    # Instructions si la boucle se termine normalement</code></li>
+</ul>
+<h1>2. Chaînes de caractères</h1>
+<h2>2.1. Opérations de base sur les chaînes</h2>
+<p><code>python
+len(chaine)  # Longueur de la chaîne
+chaine1 + chaine2  # Concaténation
+chaine[i:j]  # Slicing (sous-chaîne de i à j exclu)</code></p>
+<h2>2.2. Méthodes courantes</h2>
+<p><code>python
+chaine.split(separateur)  # Séparer la chaîne
+separateur.join(liste_chaines)  # Joindre une liste de chaînes
+chaine.replace(chaine1, chaine2)  # Remplacer chaine1 par chaine2
+chaine.upper()  # Convertir en majuscules
+chaine.lower()  # Convertir en minuscules</code></p>
+<h2>2.3. F-strings et formatage</h2>
+<p><code>python
+nom = "Alice"
+age = 25
+f"Bonjour, je m'appelle {nom} et j'ai {age} ans."
+"Bonjour, je m'appelle {} et j'ai {} ans.".format(nom, age)
+"Bonjour, je m'appelle {0} et j'ai {1} ans.".format(nom, age)</code></p>
+<h1>3. Listes</h1>
+<h2>3.1. Création et manipulation de listes</h2>
+<p><code>python
+liste = [element1, element2, element3]
+liste[i]  # Accéder à l'élément d'index i
+liste[i:j]  # Slicing (sous-liste de i à j exclu)</code></p>
+<h2>3.2. Méthodes courantes</h2>
+<p><code>python
+liste.append(element)  # Ajouter un élément à la fin
+liste.remove(element)  # Supprimer la première occurrence de l'élément
+liste.sort()  # Trier la liste
+liste.reverse()  # Inverser la liste
+liste.index(element)  # Renvoyer l'index de la première occurrence</code></p>
+<h2>3.3. List comprehensions</h2>
+<p><code>python
+nombres_carres = [i**2 for i in range(10)]
+nombres_pairs = [i for i in range(10) if i % 2 == 0]</code></p>
+<h1>4. Dictionnaires</h1>
+<h2>4.1. Création et manipulation de dictionnaires</h2>
+<p><code>python
+dico = {cle1: valeur1, cle2: valeur2, cle3: valeur3}
+dico[cle]  # Accéder à la valeur correspondant à la clé</code></p>
+<h2>4.2. Méthodes courantes</h2>
+<p><code>python
+dico.keys()  # Renvoyer la liste des clés
+dico.values()  # Renvoyer la liste des valeurs
+dico.items()  # Renvoyer la liste des couples (clé, valeur)
+dico.get(cle, valeur_defaut)  # Renvoyer la valeur ou la valeur par défaut</code></p>
+<h2>4.3. Boucles sur les dictionnaires</h2>
+<p><code>python
+for cle, valeur in dico.items():
+    # Instructions exécutées pour chaque paire clé-valeur</code></p>
+<h1>5. Procédures et fonctions</h1>
+<h2>5.1. Définir des fonctions avec <code>def</code></h2>
+<p><code>python
+def nom_fonction(parametre1, parametre2=default):
+    # Instructions de la fonction
+    return valeur  # Renvoyer une valeur</code></p>
+<h2>5.2. Paramètres</h2>
+<ul>
+<li>Paramètres obligatoires : <code>def fonction(param1, param2):</code></li>
+<li>Paramètres optionnels : <code>def fonction(param1, param2=default):</code></li>
+<li><code>*args</code> : liste d'arguments positionnels</li>
+<li><code>**kwargs</code> : dictionnaire d'arguments nommés</li>
+</ul>
+<h2>5.3. Valeurs de retour et portée des variables</h2>
+<ul>
+<li><code>return</code> : renvoyer une valeur</li>
+<li>Variables locales : définies à l'intérieur d'une fonction</li>
+<li>Variables globales : définies à l'extérieur des fonctions</li>
+</ul>
+<h1>6. Manipulation des fichiers</h1>
+<h2>6.1. Ouverture et fermeture de fichiers</h2>
+<p><code>python
+fichier = open("chemin/vers/fichier", mode)
+fichier.close()</code></p>
+<h2>6.2. Modes d'ouverture</h2>
+<ul>
+<li><code>r</code> : lecture seule</li>
+<li><code>w</code> : écriture (crée un nouveau fichier ou écrase le contenu)</li>
+<li><code>a</code> : ajout (écriture à la fin du fichier)</li>
+<li><code>r+</code> : lecture et écriture</li>
+</ul>
+<h2>6.3. Lecture et écriture dans les fichiers</h2>
+<p><code>python
+fichier.read()  # Lire le contenu du fichier
+fichier.readline()  # Lire une ligne du fichier
+fichier.write(chaine)  # Écrire une chaîne dans le fichier</code></p>
+<h2>6.4. Gestion des fichiers avec <code>with</code></h2>
+<p>```python
+with open("fichier.txt", "r") as fichier:
+    contenu = fichier.read()</p>
+<h1>Le fichier est automatiquement fermé à la fin du bloc with</h1>
+<p>```</p>
+<h1>7. Outils pratiques</h1>
+<h2>7.1. Fonctions intégrées</h2>
+<ul>
+<li><code>range(n)</code> : générer une séquence de 0 à n-1</li>
+<li><code>enumerate(sequence)</code> : itérer sur une séquence avec un index</li>
+<li><code>zip(seq1, seq2)</code> : grouper les éléments de deux séquences</li>
+<li><code>map(fonction, sequence)</code> : appliquer une fonction à chaque élément</li>
+<li><code>filter(fonction, sequence)</code> : filtrer les éléments d'une séquence</li>
+</ul>
+<h2>7.2. Gestion des erreurs avec <code>try/except</code></h2>
+<p><code>python
+try:
+    # Instructions susceptibles de provoquer une erreur
+except TypeErreur as err:
+    # Instructions exécutées en cas d'erreur de type TypeErreur
+except (Type1, Type2) as err:
+    # Instructions exécutées en cas d'erreur de type Type1 ou Type2
+except Exception as err:
+    # Instructions exécutées en cas d'erreur quel que soit le type
+else:
+    # Instructions exécutées si aucune erreur n'est levée
+finally:
+    # Instructions exécutées à la fin, qu'il y ait eu une erreur ou non</code></p>
+<h2>7.3. Importation de modules</h2>
+<p><code>python
+import module
+from module import fonction
+from module import classe
+import module as alias
+from package.module import fonction</code></p>
+<h1>8. Exemples de code</h1>
+<h2>8.1. Calcul de la somme des éléments d'une liste</h2>
+<p><code>python
+def somme_liste(liste):
+    somme = 0
+    for element in liste:
+        somme += element
+    return somme</code></p>
+<h2>8.2. Compter le nombre d'occurrences de chaque élément dans une liste</h2>
+<p><code>python
+def compter_occurrences(liste):
+    occurences = {}
+    for element in liste:
+        occurences[element] = occurences.get(element, 0) + 1
+    return occurences</code></p>
+<h2>8.3. Lire et écrire dans un fichier</h2>
+<p>```python
+with open("fichier.txt", "r") as fichier:
+    contenu = fichier.read()</p>
+<p>with open("fichier.txt", "w") as fichier:
+    fichier.write("Contenu à écrire dans le fichier")
+```</p>
+<h2>8.4. Utilisation de modules</h2>
+<p>```python
+import math</p>
+<p>rayon = 5
+surface = math.pi * rayon**2
+```</p>
+<h2>8.5. Gestion des erreurs</h2>
+<p><code>python
+def diviser(a, b):
+    try:
+        resultat = a / b
+    except ZeroDivisionError:
+        print("Division par zéro !")
+        resultat = None
+    return resultat</code></p>
+<h2>8.6. Utilisation de list comprehensions</h2>
+<p><code>python
+nombres = [1, 2, 3, 4, 5]
+carres_pairs = [i**2 for i in nombres if i % 2 == 0]</code></p>
+<h2>8.7. Création d'une liste de tuples</h2>
+<p><code>python
+noms = ["Alice", "Bob", "Charlie"]
+ages = [25, 30, 35]
+personnes = list(zip(noms, ages))</code></p>
+<h2>8.8. Utilisation de fonctions lambda</h2>
+<p><code>python
+f = lambda x: x**2
+resultat = f(5)</code></p>
+<h2>8.9. Utilisation de <code>map</code> et <code>filter</code></h2>
+<p><code>python
+nombres = [1, 2, 3, 4, 5]
+carres = list(map(lambda x: x**2, nombres))
+pairs = list(filter(lambda x: x % 2 == 0, nombres))</code></p>
+<h2>8.10. Utilisation de <code>enumerate</code></h2>
+<p><code>python
+noms = ["Alice", "Bob", "Charlie"]
+for index, nom in enumerate(noms):
+    print(f"Personne {index + 1} : {nom}")</code></p>
+<h2>8.11. Utilisation de <code>try/except/else/finally</code></h2>
+<p><code>python
+def diviser(a, b):
+    try:
+        resultat = a / b
+    except ZeroDivisionError:
+        print("Division par zéro !")
+        resultat = None
+    else:
+        print("Division effectuée avec succès !")
+    finally:
+        print("Opération terminée.")
+    return resultat</code></p>
+<h2>8.12. Utilisation de <code>os</code> pour manipuler les fichiers</h2>
+<p>```python
+import os</p>
+<p>chemin = "chemin/vers/fichier"
+if os.path.exists(chemin):
+    os.remove(chemin)
+else:
+    print("Le fichier n'existe pas.")
+```</p>
+<h2>8.13. Utilisation de <code>json</code> pour lire et écrire des fichiers JSON</h2>
+<p>```python
+import json</p>
+<p>donnees = {"nom": "Alice", "age": 25}
+with open("donnees.json", "w") as fichier:
+    json.dump(donnees, fichier)</p>
+<p>with open("donnees.json", "r") as fichier:
+    donnees = json.load(fichier)
+```</p>
+<h2>8.14. Utilisation de <code>random</code> pour générer des nombres aléatoires</h2>
+<p>```python
+import random</p>
+<p>nombres = [1, 2, 3, 4, 5]
+random.shuffle(nombres)
+nombre_aleatoire = random.choice(nombres)
+```</p>
+<h2>8.15. Utilisation de <code>time</code> pour mesurer le temps d'exécution</h2>
+<p>```python
+import time</p>
+<p>debut = time.time()</p>
+<h1>Instructions à mesurer</h1>
+<p>fin = time.time()
+duree = fin - debut
+```</p>
+<h2>8.16. Utilisation de <code>argparse</code> pour gérer les arguments de ligne de commande</h2>
+<p>```python
+import argparse</p>
+<p>parser = argparse.ArgumentParser()
+parser.add_argument("fichier", help="Chemin du fichier à lire")
+parser.add_argument("-o", "--option", help="Option à activer")
+args = parser.parse_args()</p>
+<p>print(f"Fichier : {args.fichier}")
+if args.option:
+    print(f"Option : {args.option}")
+```</p>
+<h2>8.17. Utilisation de <code>unittest</code> pour écrire des tests unitaires</h2>
+<p>```python
+import unittest</p>
+<p>def somme(a, b):
+    return a + b</p>
+<p>class TestSomme(unittest.TestCase):
+    def test_somme_positifs(self):
+        self.assertEqual(somme(2, 3), 5)</p>
+<pre><code>def test_somme_negatif_positif(self):
+    self.assertEqual(somme(-2, 3), 1)
+</code></pre>
+<p>if <strong>name</strong> == "<strong>main</strong>":
+    unittest.main()
+```</p>

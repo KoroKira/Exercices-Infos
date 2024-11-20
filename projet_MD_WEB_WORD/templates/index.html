@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Converter</title>
+</head>
+<body>
+    <h1>Convertisseur de fichiers Markdown</h1>
+    <form action="/convert_to_web" method="post" enctype="multipart/form-data">
+        <label for="md_file">Choisissez un fichier Markdown:</label>
+        <input type="file" id="md_file" name="md_file" accept=".md" required>
+        <button type="submit">Convertir en Page Web</button>
+    </form>
+    <br>
+    <form action="/convert_to_word" method="post" enctype="multipart/form-data">
+        <label for="md_file">Choisissez un fichier Markdown:</label>
+        <input type="file" id="md_file" name="md_file" accept=".md" required>
+        <button type="submit">Convertir en Document Word</button>
+    </form>
+</body>
+</html>

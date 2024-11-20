@@ -196,6 +196,7 @@ class BlackjackConsole(Blackjack):
             # Demander si le joueur veut rejouer
             rejouer = input("Pour récupérer vos gains, faites o : ")
             if rejouer.lower() != 'o':
+                print("Merci d'avoir joué ! L'addiction au jeu est dangereuse pour la santé.")
                 break
 
 # Exemple d'utilisation

@@ -2,7 +2,7 @@ import json
 import os
 from blackjack import Blackjack
 from gestion_mises import JoueurAvecSolde
-from leaderboard import afficher_leaderboard  # Importer la fonction leaderboard
+from leaderboard import afficher_leaderboard  #  fonction leaderboard
 
 class BlackjackConsole(Blackjack):
     def __init__(self):
